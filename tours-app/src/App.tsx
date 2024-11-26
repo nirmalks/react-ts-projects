@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useEffect, useState } from 'react';
+import './App.css';
+import ToursList from './ToursList';
+import { tours as ToursData } from './ToursData';
+import TourType from './TourType';
 function App() {
-  const [count, setCount] = useState(0)
+  const [tours, setTours] = useState<TourType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const fetchTours = async () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setTours(ToursData);
+      setIsLoading(false);
+    }, 3000);
+  };
+
+  const removeTour = (id) => {
+    const newTours = tours.filter((tour) => tour.id !== id);
+    setTours(newTours);
+  };
+
+  useEffect(() => {
+    fetchTours();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-solid"></div>
+      </div>
+    );
+  }
+
+  if (tours.length === 0) {
+    console.log(tours);
+    return (
+      <main>
+        <div>
+          <h2>No tours left</h2>
+          <button onClick={() => fetchTours()}>Refresh</button>
+        </div>
+      </main>
+    );
+  }
+  console.log(tours);
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <ToursList tours={tours} removeTour={removeTour}></ToursList>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
