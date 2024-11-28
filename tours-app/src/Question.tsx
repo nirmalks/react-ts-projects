@@ -13,14 +13,17 @@ export default function Question({
     setShowInfo(!showAnswer);
   };
   return (
-    <article className="question">
-      <header>
-        <h4>{question} </h4>
-        <button className="btn" onClick={toggleShowAnswer}>
+    <article className="question container">
+      <header className="flex justify-center bg-[#EBEEF2] mb-2 ">
+        <h4 className="text-xl   p-2">{question} </h4>
+        <button
+          className="p-2 hover:text-pink-500 transition-colors duration-300"
+          onClick={toggleShowAnswer}
+        >
           {showAnswer ? <AiOutlineMinus /> : <AiOutlinePlus />}
         </button>
       </header>
-      {showAnswer && <p>{answer}</p>}
+      {showAnswer && <p className="text-xl text-gray-700 mt-2 p-4">{answer}</p>}
     </article>
   );
 }

@@ -47,21 +47,32 @@ export default function ReviewsList({ reviews }: ReviewsProps) {
   };
 
   return (
-    <section>
-      <h3>{name}</h3>
-      <img src={image} />
-      <span>{rating}</span>
-      <p>{comment}</p>
-      <div className="button-container">
-        <button className="prev-btn" onClick={prevReview}>
+    <section className="text-center max-w-xl mx-auto p-4 bg-white rounded-lg shadow-lg">
+      <h3 className="text-2xl font-semibold text-gray-800 mb-4">{name}</h3>
+      <img src={image} className="w-24 h-24 rounded-full mx-auto  mb-4" />
+      <div className="text-center mb-4">
+        <span className="text-yellow-600 text-lg">{rating} stars</span>
+      </div>
+      <p className="text-gray-700 mb-6">{comment}</p>
+      <div className="flex justify-center items-center mb-4">
+        <button
+          className="prev-btn bg-pink-500 text-white p-2 rounded-full hover:bg-pink-600"
+          onClick={prevReview}
+        >
           <FaChevronLeft />
         </button>
-        <button className="next-btn" onClick={nextReview}>
+        <button
+          className="ml-2 bg-pink-500 text-white p-2 rounded-full hover:bg-pink-600"
+          onClick={nextReview}
+        >
           <FaChevronRight />
         </button>
       </div>
-      <button className="random-btn" onClick={randomReview}>
-        surprise me
+      <button
+        className="bg-pink-500 p-3 rounded-lg text-white hover:bg-pink-600"
+        onClick={randomReview}
+      >
+        Random Review!
       </button>
     </section>
   );

@@ -9,7 +9,6 @@ import ReviewType from './ReviewType';
 import { questions as QuestionsData } from './QuestionsData';
 import { QuestionsType } from './QuestionsType';
 import Question from './Question';
-import { Categories } from './Categories';
 
 const allCategories = [
   'all',
@@ -35,7 +34,7 @@ function App() {
         setTours(ToursData);
         setAllTours(ToursData);
         resolve(); // Resolve the promise after data is set
-      }, 2000);
+      }, 500);
     });
   };
 
@@ -44,7 +43,7 @@ function App() {
       setTimeout(() => {
         setReviews(ReviewsData);
         resolve();
-      }, 3000);
+      }, 500);
     });
   };
 
@@ -53,7 +52,7 @@ function App() {
       setTimeout(() => {
         setQuestions(QuestionsData);
         resolve();
-      }, 3000);
+      }, 500);
     });
   };
   const removeTour = (id: number) => {
@@ -92,25 +91,35 @@ function App() {
     <AppContext.Provider value={{ categories, filterTours }}>
       <div className="container mx-auto p-4">
         {tours.length === 0 ? (
-          <main>
+          <main className="text-center mt-4">
             <div>
-              <h2>No tours left</h2>
-              <button onClick={() => fetchTours()}>Refresh</button>
+              <h2 className="bg-pink-400 text-3xl font-semibold text-center text-gray-800 p-4 rounded-lg shadow-md">
+                No tours left
+              </h2>
+              <button
+                className="mt-4 bg-blue-500 text-white p-4 rounded hover:bg-blue-600 transition"
+                onClick={() => fetchTours()}
+              >
+                Refresh
+              </button>
             </div>
           </main>
         ) : (
           <ToursList tours={tours} removeTour={removeTour}></ToursList>
         )}
-        <section className="container">
-          <div className="title">
-            <h2>our reviews</h2>
-            <ReviewsList reviews={reviews}></ReviewsList>
-            <section className="info">
-              {questions.map((question) => {
-                return <Question key={question.id} {...question}></Question>;
-              })}
-            </section>
-          </div>
+        <section className="mt-8 container">
+          <h2 className="mb-4 bg-pink-400 text-3xl font-semibold text-center text-gray-800 p-4 rounded-lg shadow-md">
+            Reviews
+          </h2>
+          <ReviewsList reviews={reviews}></ReviewsList>
+        </section>
+        <section className="mt-8 container">
+          <h2 className="mb-4 bg-pink-400 text-3xl font-semibold text-center text-gray-800 p-4 rounded-lg shadow-md">
+            Questions
+          </h2>
+          {questions.map((question) => {
+            return <Question key={question.id} {...question}></Question>;
+          })}
         </section>
       </div>
     </AppContext.Provider>
