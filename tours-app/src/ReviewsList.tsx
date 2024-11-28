@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import ReviewType from './ReviewType';
-import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 interface ReviewsProps {
   reviews: ReviewType[];
 }
 
 export default function ReviewsList({ reviews }: ReviewsProps) {
+  console.log(reviews);
+
+  if (reviews.length === 0) {
+    return <p>No reviews available.</p>;
+  }
   const [currentIndex, setCurrentIndex] = useState(0);
   const { name, rating, comment, image } = reviews[currentIndex];
   const [size, setSize] = useState(reviews.length);
@@ -40,6 +45,7 @@ export default function ReviewsList({ reviews }: ReviewsProps) {
     }
     setCurrentIndex(handleNumberChange(randomNumber));
   };
+
   return (
     <section>
       <h3>{name}</h3>

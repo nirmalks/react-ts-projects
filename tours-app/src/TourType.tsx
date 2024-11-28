@@ -3,4 +3,5 @@ export default interface TourType {
   title: string;
   description: string;
   price: number;
+  category: string;
 }

@@ -9,45 +9,58 @@ import ReviewType from './ReviewType';
 import { questions as QuestionsData } from './QuestionsData';
 import { QuestionsType } from './QuestionsType';
 import Question from './Question';
+import { Categories } from './Categories';
+
+const allCategories = [
+  'all',
+  ...new Set(ToursData.map((tour) => tour.category)),
+];
 function App() {
+  const [allTours, setAllTours] = useState<TourType[]>([]);
   const [tours, setTours] = useState<TourType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [questions, setQuestions] = useState<QuestionsType[]>([]);
-
-  const fetchTours = async () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setTours(ToursData);
-      setIsLoading(false);
-    }, 3000);
+  const [categories, setCategories] = useState<string[]>(allCategories);
+  const fetchTours = () => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setTours(ToursData);
+        setAllTours(ToursData);
+        resolve(); // Resolve the promise after data is set
+      }, 2000);
+    });
   };
 
-  const fetchReviews = async () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setReviews(ReviewsData);
-      setIsLoading(false);
-    }, 3000);
+  const fetchReviews = () => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setReviews(ReviewsData);
+        resolve();
+      }, 3000);
+    });
   };
 
-  const fetchQuestions = async () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setQuestions(QuestionsData);
-      setIsLoading(false);
-    }, 3000);
+  const fetchQuestions = () => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setQuestions(QuestionsData);
+        resolve();
+      }, 3000);
+    });
   };
-
   const removeTour = (id: number) => {
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   };
 
   useEffect(() => {
-    fetchTours();
-    fetchReviews();
-    fetchQuestions();
+    setIsLoading(true);
+    const fetchData = async () => {
+      await Promise.all([fetchTours(), fetchReviews(), fetchQuestions()]);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
 
   if (isLoading) {
@@ -58,22 +71,33 @@ function App() {
     );
   }
 
-  if (tours.length === 0) {
-    console.log(tours);
-    return (
-      <main>
-        <div>
-          <h2>No tours left</h2>
-          <button onClick={() => fetchTours()}>Refresh</button>
-        </div>
-      </main>
+  const filterTours = (category: string) => {
+    if (category === 'all') {
+      setTours(allTours);
+      return;
+    }
+    const filteredTours = allTours.filter(
+      (filter) => filter.category === category
     );
-  }
-  console.log(tours);
+    setTours(filteredTours);
+  };
   return (
     <>
       <div>
-        <ToursList tours={tours} removeTour={removeTour}></ToursList>
+        <Categories
+          categories={categories}
+          filterTours={filterTours}
+        ></Categories>
+        {tours.length === 0 ? (
+          <main>
+            <div>
+              <h2>No tours left</h2>
+              <button onClick={() => fetchTours()}>Refresh</button>
+            </div>
+          </main>
+        ) : (
+          <ToursList tours={tours} removeTour={removeTour}></ToursList>
+        )}
         <section className="container">
           <div className="title">
             <h2>our reviews</h2>
