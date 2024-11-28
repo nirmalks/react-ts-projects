@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import './App.css';
 import ToursList from './ToursList';
 import { tours as ToursData } from './ToursData';
@@ -15,6 +15,12 @@ const allCategories = [
   'all',
   ...new Set(ToursData.map((tour) => tour.category)),
 ];
+
+interface AppContextType {
+  categories: string[];
+  filterTours: (category: string) => void;
+}
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 function App() {
   const [allTours, setAllTours] = useState<TourType[]>([]);
   const [tours, setTours] = useState<TourType[]>([]);
@@ -22,6 +28,7 @@ function App() {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [questions, setQuestions] = useState<QuestionsType[]>([]);
   const [categories, setCategories] = useState<string[]>(allCategories);
+
   const fetchTours = () => {
     return new Promise<void>((resolve) => {
       setTimeout(() => {
@@ -82,12 +89,8 @@ function App() {
     setTours(filteredTours);
   };
   return (
-    <>
-      <div>
-        <Categories
-          categories={categories}
-          filterTours={filterTours}
-        ></Categories>
+    <AppContext.Provider value={{ categories, filterTours }}>
+      <div className="container mx-auto p-4">
         {tours.length === 0 ? (
           <main>
             <div>
@@ -110,7 +113,7 @@ function App() {
           </div>
         </section>
       </div>
-    </>
+    </AppContext.Provider>
   );
 }
 
