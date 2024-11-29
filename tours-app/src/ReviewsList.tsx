@@ -6,12 +6,11 @@ interface ReviewsProps {
 }
 
 export default function ReviewsList({ reviews }: ReviewsProps) {
-  console.log(reviews);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   if (reviews.length === 0) {
     return <p>No reviews available.</p>;
   }
-  const [currentIndex, setCurrentIndex] = useState(0);
   const { name, rating, comment, image } = reviews[currentIndex];
   const [size, setSize] = useState(reviews.length);
 
