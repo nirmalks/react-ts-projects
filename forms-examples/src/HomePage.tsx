@@ -42,7 +42,9 @@ function HomePage() {
       <ToastContainer></ToastContainer>
       <Navbar></Navbar>
       <section className="container mx-auto p-4">
-        <h2 className="text-3xl p-4 text-pink-500">Para generator</h2>
+        <h2 className="text-2xl p-4 text-pink-500 uppercase font-bold">
+          Para generator
+        </h2>
         <form onSubmit={handleParaSubmit}>
           <label htmlFor="amount" className="mr-4 text-gray-700">
             Paragraphs
@@ -75,7 +77,9 @@ function HomePage() {
         )}
       </section>
       <section className="container mx-auto p-4">
-        <h2 className="text-3xl p-4 text-pink-500 mb-4">Color generator</h2>
+        <h2 className="text-2xl p-4 text-pink-500 mb-4 uppercase font-bold">
+          Color generator
+        </h2>
         <form onSubmit={handleColorSubmit}>
           <input
             type="color"

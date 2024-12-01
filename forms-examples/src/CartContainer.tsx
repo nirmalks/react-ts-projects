@@ -9,7 +9,9 @@ export default function CartContainer() {
       <Navbar></Navbar>
       <section className="container">
         <header>
-          <h2 className="text-2xl font-bold uppercase p-4">Shopping Cart</h2>
+          <h2 className="text-2xl p-4 text-pink-500 mb-4 uppercase font-bold">
+            Shopping Cart
+          </h2>
         </header>
         <div className="mt-12 flex flex-col container mx-auto max-w-4xl">
           {cart.map((item) => {

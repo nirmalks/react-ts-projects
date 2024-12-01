@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <div className="bg-slate-200 shadow">
       <nav className=" container mx-auto h-20 flex justify-between items-center px-6">
-        <h1 className="text-2xl font-bold">Form Related Examples</h1>
+        <h1 className="text-xl font-bold ">Form Related Examples</h1>
         <div className="flex items-center gap-6 relative">
           <Link
             to="/"
