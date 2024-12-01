@@ -16,7 +16,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            to="cart"
+            to="/cart"
             className="relative flex items-center text-gray-700 hover:text-gray-900"
           >
             Cart
