@@ -1,5 +1,4 @@
 import { IoBagCheckOutline } from 'react-icons/io5';
-import CartContainer from './CartContainer';
 import { Link } from 'react-router';
 import { useAppContext } from './AppContext';
 

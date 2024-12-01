@@ -1,5 +1,4 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import mobiles from './mobiles';
 import { useAppContext } from './AppContext';
 
 export default function CartItem({

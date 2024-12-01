@@ -12,7 +12,6 @@ import {
   GET_TOTAL_ACTION,
   INCREASE_QUANTITY_ACTION,
   LOADING_ACTION,
-  TOGGLE_QUANTITY_ACTION,
   VIEW_ITEMS_ACTION,
 } from './actions';
 import mobiles from './mobiles';
