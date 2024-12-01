@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { ErrorBoundary } from 'react-error-boundary';
+import { AppProvider } from './AppContext.tsx';
 
 const logError = (error: Error, info: { componentStack: string }) => {
   console.log(error);
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
       fallback={<div>Something went wrong</div>}
       onError={logError}
     >
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </ErrorBoundary>
   </StrictMode>
 );
