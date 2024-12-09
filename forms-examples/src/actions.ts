@@ -1,5 +1,3 @@
-
-
 export const LOADING_ACTION = 'LOADING';
 export const VIEW_ITEMS_ACTION = 'VIEW_ITEMS';
 export const INCREASE_QUANTITY_ACTION = 'INCREASE_QUANTITY';
