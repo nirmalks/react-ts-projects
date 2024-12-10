@@ -2,14 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cart from './CartItem';
 import { clearCart, getTotal } from '../features/cart/cartSlice';
 import { useEffect } from 'react';
+import { openModal } from '../features/modal/modalSlice';
 
 export default function CartContainer() {
   const dispatch = useDispatch();
   const { cart, total } = useSelector((state) => state.cart);
-  console.log(cart);
   useEffect(() => {
     dispatch(getTotal());
-    console.log('ttaol afer effet', total);
   }, [cart, dispatch]);
   return (
     <main className="container mx-auto p-4">
@@ -38,7 +37,7 @@ export default function CartContainer() {
               </div>
               <button
                 className="rounded-lg bg-pink-400 ml-4 p-2 shadow-lg hover:bg-pink-500 transition-all duration-300"
-                onClick={() => dispatch(clearCart())}
+                onClick={() => dispatch(openModal())}
               >
                 Clear Cart
               </button>

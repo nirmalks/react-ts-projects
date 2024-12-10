@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import mobiles from "../../mobiles";
 
-
 interface AppState {
   loading: boolean;
   cart: typeof mobiles;
@@ -25,12 +24,10 @@ const cartSlice = createSlice({
     },
     deleteItem: (state, action) => {
       const { id } = action.payload;
-      console.log('id in ddelete', id)
       state.cart = state.cart.filter((item) => item.id !== id)
     },
     increaseQuantity: (state, { payload }) => {
       const id = payload.id
-      console.log('id,', id)
       state.cart = state.cart.map((item) => {
         if (item.id === id) {
           return { ...item, quantity: item.quantity + 1 }
@@ -50,7 +47,6 @@ const cartSlice = createSlice({
 
     },
     getTotal: (state) => {
-      console.log('insdie get ttoal', state)
       let { total, quantity } = state.cart.reduce(
         (cartTotal, cartItem) => {
           const { price, quantity } = cartItem
@@ -72,6 +68,5 @@ const cartSlice = createSlice({
   }
 });
 
-console.log(cartSlice)
 export const { clearCart, increaseQuantity, decreaseQuantity, getTotal, deleteItem } = cartSlice.actions
 export default cartSlice.reducer
