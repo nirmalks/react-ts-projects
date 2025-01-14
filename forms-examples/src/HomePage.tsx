@@ -12,7 +12,6 @@ function HomePage() {
   const [text, setText] = useState<string[]>([]);
   const [color, setColor] = useState<string>('#e91e63');
   const [colorList, setColorList] = useState(new Values('#e91e63').all(10));
-  const [error, setError] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleParaSubmit = (e: FormEvent) => {
@@ -34,7 +33,7 @@ function HomePage() {
       const colors = new Values(color).all(10);
       setColorList(colors);
     } catch (error) {
-      setError(true);
+      console.log(error); // can show error with maintaining the value in a state
     }
   };
   return (
@@ -102,10 +101,10 @@ function HomePage() {
           {colorList.map((color, index) => {
             return (
               <Color
+                {...color}
                 key={index}
                 index={index}
                 hexString={color.hex}
-                {...color}
               />
             );
           })}

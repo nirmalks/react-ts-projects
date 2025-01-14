@@ -1,17 +1,17 @@
-import rgbToHex from './utils';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function Color({
-  rgb,
-  weight,
-  index,
-  hexString,
-}: {
-  rgb: string[];
-  weight: number;
+
+export type ColorType = {
+  key: number;
   index: number;
   hexString: string;
-}) {
+  alpha: number;
+  rgb: [number, number, number];
+  type: string;
+  weight: number;
+  hex: string;
+};
+export default function Color({ rgb, weight, index, hexString }: ColorType) {
   const bcg = rgb.join(',');
   const hexValue = `#${hexString}`;
   const notify = () => toast('Copied to Clipboard!');

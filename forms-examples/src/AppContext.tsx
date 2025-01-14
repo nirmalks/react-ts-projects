@@ -4,8 +4,10 @@ import {
   useReducer,
   useEffect,
   ReactNode,
+  Dispatch,
 } from 'react';
 import {
+  Action,
   CLEAR_CART_ACTION,
   DECREASE_QUANTITY_ACTION,
   DELETE_ITEM_ACTION,
@@ -17,9 +19,9 @@ import {
 import mobiles from './mobiles';
 import reducer from './reducer';
 
-interface AppState {
+export interface AppState {
   loading: boolean;
-  cart: typeof mobiles; // Assuming `mobiles` is an array of objects
+  cart: typeof mobiles;
   total: number;
   quantity: number;
 }
@@ -29,7 +31,6 @@ interface AppContextType extends AppState {
   decreaseQuantity: (id: number) => void;
   deleteItem: (id: number) => void;
   clearCart: () => void;
-  toggleQuantity: (id: number, type: string) => void;
 }
 
 interface AppProviderProps {
@@ -46,7 +47,10 @@ const initialState = {
 };
 
 const AppProvider = ({ children }: AppProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch]: [AppState, Dispatch<Action>] = useReducer(
+    reducer,
+    initialState
+  );
 
   const fetchData = async () => {
     dispatch({ type: LOADING_ACTION });

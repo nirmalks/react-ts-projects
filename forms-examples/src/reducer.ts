@@ -1,6 +1,7 @@
-import { CLEAR_CART_ACTION, DECREASE_QUANTITY_ACTION, DELETE_ITEM_ACTION, GET_TOTAL_ACTION, INCREASE_QUANTITY_ACTION, LOADING_ACTION, TOGGLE_QUANTITY_ACTION, VIEW_ITEMS_ACTION } from "./actions"
+import { Action, CLEAR_CART_ACTION, DECREASE_QUANTITY_ACTION, DELETE_ITEM_ACTION, GET_TOTAL_ACTION, INCREASE_QUANTITY_ACTION, LOADING_ACTION, VIEW_ITEMS_ACTION } from "./actions"
+import { AppState } from "./AppContext";
 
-export default function reducer(state, action) {
+export default function reducer(state: AppState, action: Action): AppState {
   if (action.type === CLEAR_CART_ACTION) {
     return { ...state, cart: [] }
   }

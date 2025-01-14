@@ -19,7 +19,7 @@ export default function CartContainer() {
           })}
         </div>
         <hr />
-        <footer className=" p-4  flex flex-col gap-4 items-center justify-center">
+        <footer className=" p-4 flex flex-col gap-4 items-center justify-center">
           <div className="flex items-center gap-2">
             <h4 className="text-xl font-semibold ">
               <span>Total:</span>
