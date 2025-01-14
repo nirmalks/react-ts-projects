@@ -7,7 +7,7 @@ export default function Question({
 }: {
   question: string;
   answer: string;
-}) {
+}): JSX.Element {
   const [showAnswer, setShowInfo] = useState(false);
   const toggleShowAnswer = () => {
     setShowInfo(!showAnswer);

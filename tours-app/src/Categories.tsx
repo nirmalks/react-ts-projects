@@ -4,7 +4,7 @@ export const Categories = ({
 }: {
   categories: string[];
   filterTours: (category: string) => void;
-}) => {
+}): JSX.Element => {
   return (
     <div className="container">
       {categories.map((category, index) => {

@@ -10,8 +10,8 @@ interface TourProps {
   removeTour: (id: number) => void;
 }
 
-export default function Tour({ tour, removeTour }: TourProps) {
-  const [readMore, setReadMore] = useState(false);
+export default function Tour({ tour, removeTour }: TourProps): JSX.Element {
+  const [readMore, setReadMore] = useState<boolean>(false);
 
   const handleReadMore = () => {
     setReadMore(!readMore);

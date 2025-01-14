@@ -10,8 +10,13 @@ export default function ToursList({
 }: {
   tours: TourType[];
   removeTour: (id: number) => void;
-}) {
-  const { categories, filterTours } = useContext(AppContext);
+}): JSX.Element {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('AppContext must be used within a provider');
+  }
+
+  const { categories, filterTours } = context;
   return (
     <>
       <h2 className="bg-pink-400 text-3xl font-semibold text-center text-gray-800 p-4 rounded-lg shadow-md">

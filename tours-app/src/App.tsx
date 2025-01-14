@@ -26,7 +26,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [questions, setQuestions] = useState<QuestionsType[]>([]);
-  const [categories, setCategories] = useState<string[]>(allCategories);
+  const [categories] = useState<string[]>(allCategories);
 
   const fetchTours = () => {
     return new Promise<void>((resolve) => {
