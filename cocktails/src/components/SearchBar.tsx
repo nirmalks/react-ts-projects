@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useAppContext } from '../UseAppContext';
 
 export const SearchBar: React.FC = () => {
   const { setSearchTerm } = useAppContext();
-  const searchValue = useRef<HTMLInputElement>('');
+  const searchValue = useRef<HTMLInputElement>(null);
   const handleSearch = () => {
-    setSearchTerm(searchValue.current.value);
+    if (searchValue.current) {
+      setSearchTerm(searchValue.current.value);
+    }
   };
   return (
     <div className="max-w-md mx-auto mt-10 ">

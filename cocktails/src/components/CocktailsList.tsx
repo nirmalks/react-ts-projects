@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useAppContext } from '../UseAppContext';
 import { Cocktail } from './Cocktail';
 import Loading from './Loading';
 
 export const CocktailsList = () => {
   const { cocktails, loading, isSearched } = useAppContext();
-
   if (loading) {
     return <Loading />;
   }

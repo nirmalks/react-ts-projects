@@ -4,17 +4,18 @@ import { useParams } from 'react-router';
 import Loading from '../components/Loading';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { CocktailSingleResponse } from '../AppContext';
 
 export const CocktailPage: React.FC = () => {
   const { id } = useParams();
   const [loading, setIsLoading] = useState(false);
-  const [drink, setDrink] = useState(null);
+  const [drink, setDrink] = useState<CocktailSingleResponse | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
     async function getCocktail() {
       try {
-        const response = await axios.get(
+        const response = await axios.get<{ drinks: CocktailSingleResponse[] }>(
           `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
         );
         const data = response.data;
@@ -81,7 +82,7 @@ export const CocktailPage: React.FC = () => {
                 <span className="font-semibold">Ingredients:</span>{' '}
                 {drink.strIngredients
                   .filter((item) => item)
-                  .map((item, index) => (
+                  .map((item: string, index: number) => (
                     <span
                       key={index}
                       className="inline-block bg-gray-200 rounded px-2 py-1 mx-1"
