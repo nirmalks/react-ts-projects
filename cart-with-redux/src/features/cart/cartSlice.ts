@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import mobiles from "../../mobiles";
 
-interface AppState {
+export interface AppState {
   loading: boolean;
   cart: typeof mobiles;
   total: number;
@@ -14,19 +14,23 @@ const initialState = {
   loading: true
 }
 
+type IdPayload = {
+  id: string
+}
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    clearCart: (state) => {
+    clearCart: (state: AppState) => {
       state.cart = []
       // return { cart: [] } //another way to return state
     },
-    deleteItem: (state, action) => {
+    deleteItem: (state: AppState, action: PayloadAction<IdPayload>) => {
       const { id } = action.payload;
       state.cart = state.cart.filter((item) => item.id !== id)
     },
-    increaseQuantity: (state, { payload }) => {
+    increaseQuantity: (state: AppState, { payload }: PayloadAction<IdPayload>) => {
       const id = payload.id
       state.cart = state.cart.map((item) => {
         if (item.id === id) {
@@ -36,7 +40,7 @@ const cartSlice = createSlice({
       }).filter((cartItem) => cartItem?.quantity !== 0)
 
     },
-    decreaseQuantity: (state, { payload }) => {
+    decreaseQuantity: (state: AppState, { payload }: PayloadAction<IdPayload>) => {
       const id = payload.id
       state.cart = state.cart.map((item) => {
         if (item.id === id) {
@@ -46,8 +50,8 @@ const cartSlice = createSlice({
       }).filter((item) => item?.quantity !== 0)
 
     },
-    getTotal: (state) => {
-      let { total, quantity } = state.cart.reduce(
+    getTotal: (state: AppState) => {
+      const { total, quantity } = state.cart.reduce(
         (cartTotal, cartItem) => {
           const { price, quantity } = cartItem
           const itemTotal = price * quantity

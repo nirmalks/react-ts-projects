@@ -1,24 +1,35 @@
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
 import {
   decreaseQuantity,
   deleteItem,
   increaseQuantity,
 } from '../features/cart/cartSlice';
+import { useAppDispatch } from '../hooks';
+
+export type CartItem = {
+  id: string;
+  name: string;
+  brand: string;
+  price: number;
+  specs: {
+    screenSize: string;
+    processor: string;
+    ram: string;
+    storage: string;
+    battery: string;
+  };
+  imageUrl: string;
+  quantity: number;
+  key?: string;
+};
 export default function CartItem({
   id,
   imageUrl,
   name,
   price,
   quantity,
-}: {
-  id: number;
-  imageUrl: string;
-  name: string;
-  price: number;
-  quantity: number;
-}) {
-  const dispatch = useDispatch();
+}: CartItem) {
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex flex-row gap-10 mb-6  pb-4 r">

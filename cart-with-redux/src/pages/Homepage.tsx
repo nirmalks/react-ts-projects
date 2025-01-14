@@ -6,10 +6,10 @@ import CartContainer from '../components/CartContainer';
 import Modal from '../components/Modal';
 import CartModal from '../components/CartModal';
 import { closeModal } from '../features/modal/modalSlice';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../hooks';
 
 function HomePage() {
-  const { isOpen } = useSelector((state) => state.modal);
+  const { isOpen } = useAppSelector((state) => state.modal);
 
   return (
     <main className="container mx-auto p-4">

@@ -1,10 +1,10 @@
 import { IoBagCheckOutline } from 'react-icons/io5';
 import { Link } from 'react-router';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useAppSelector } from '../hooks';
 
 export default function Navbar() {
-  const { quantity } = useSelector((state) => state.cart);
+  const { quantity } = useAppSelector((state) => state.cart);
 
   useEffect(() => {});
   return (

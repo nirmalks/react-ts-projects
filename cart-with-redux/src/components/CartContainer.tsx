@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
 import Cart from './CartItem';
-import { clearCart, getTotal } from '../features/cart/cartSlice';
+import { getTotal } from '../features/cart/cartSlice';
 import { useEffect } from 'react';
 import { openModal } from '../features/modal/modalSlice';
+import { useAppDispatch, useAppSelector } from '../hooks';
 
 export default function CartContainer() {
-  const dispatch = useDispatch();
-  const { cart, total } = useSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const { cart, total } = useAppSelector((state) => state.cart);
   useEffect(() => {
     dispatch(getTotal());
   }, [cart, dispatch]);

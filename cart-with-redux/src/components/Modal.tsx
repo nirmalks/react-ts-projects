@@ -1,6 +1,13 @@
+import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
+import { ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
 
-const Modal = ({ isOpen, onClose, children }) => {
+type ModalType = {
+  isOpen: boolean;
+  onClose: ActionCreatorWithoutPayload<'modal/closeModal'>;
+  children: ReactNode;
+};
+const Modal = ({ isOpen, onClose, children }: ModalType) => {
   const dispatch = useDispatch();
   if (!isOpen) return null;
 
