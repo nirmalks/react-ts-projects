@@ -7,12 +7,12 @@ interface ReviewsProps {
 
 export default function ReviewsList({ reviews }: ReviewsProps): JSX.Element {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const { name, rating, comment, image } = reviews[currentIndex];
   const [size] = useState<number>(reviews.length);
-
   if (reviews.length === 0) {
     return <p>No reviews available.</p>;
   }
+
+  const { name, rating, comment, image } = reviews[currentIndex];
 
   const handleNumberChange = (number: number) => {
     if (number > size - 1) {
