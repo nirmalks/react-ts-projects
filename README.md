@@ -21,6 +21,10 @@
   Fetches data from 3rd party API
   <img width="992" alt="image" src="https://github.com/user-attachments/assets/9a2e1736-1ba9-4257-ac67-667c22e3ecda" />
 
+
+https://github.com/user-attachments/assets/298fb1fd-a926-440f-a1fa-1398de08064d
+
+
 * cart with redux
 * cart page with items with prices and qty, number of items and total is displayed.
 * state is managed using redux
